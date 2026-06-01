@@ -4,27 +4,41 @@
 <meta charset="UTF-8">
 <title>CM Compta OHADA PRO</title>
 <style>
-body { font-family: Arial; background:#0f172a; color:white; text-align:center; }
-button { padding:10px; margin:10px; background:green; color:white; border:none; }
+body {
+font-family: Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+button {
+padding:10px;
+margin:10px;
+background:green;
+color:white;
+border:none;
+}
 </style>
 </head>
 <body>
+
 <h1>CM Compta OHADA PRO</h1>
+
 <button onclick="loadSales()">Ventes</button>
 <button onclick="loadStock()">Stock</button>
-<pre id="out"></pre>
+
+<pre id="out">Bienvenue sur CM Compta OHADA PRO</pre>
+
 <script>
-const API = "http://127.0.0.1:8000";
-async function loadSales(){
-let r = await fetch(API+"/sales");
-let d = await r.json();
-document.getElementById("out").innerText = JSON.stringify(d, null, 2);
+function loadSales(){
+document.getElementById("out").innerText =
+"Module ventes bientôt disponible";
 }
-async function loadStock(){
-let r = await fetch(API+"/stock");
-let d = await r.json();
-document.getElementById("out").innerText = JSON.stringify(d, null, 2);
+
+function loadStock(){
+document.getElementById("out").innerText =
+"Module stock bientôt disponible";
 }
 </script>
+
 </body>
 </html>
