@@ -1,42 +1,54 @@
-# 📊 Logiciel de Gestion Comptable OHADA Pro
+# 📊 CM COMPTA OHADA PRO
 
-## 📌 Présentation
-CM ComptA OHADA Pro est un logiciel de gestion comptable destiné aux commerçants, PME et entrepreneurs africains.  
-Il facilite la gestion comptable selon les normes OHADA.
+Logiciel de gestion comptable OHADA pour commerçants, PME et entrepreneurs africains.
 
 ---
 
-## ⚙️ Fonctionnalités
-- Gestion des ventes et achats  
-- Suivi des stocks  
-- Calcul automatique des résultats  
-- Gestion des clients et fournisseurs  
-- Tableaux de bord simples et clairs  
-- Export des données  
+## 🚀 Fonctionnalités
+
+- 📦 Gestion du stock
+- 💰 Gestion des ventes
+- 📊 Tableau de bord automatique
+- 🔔 Suivi des performances
+- 🌐 Interface web simple et rapide
 
 ---
 
-## 📦 Installation
-1. Télécharger le fichier `cm-compta-ohada-pro.zip`  
-2. Extraire le fichier sur votre ordinateur  
-3. Ouvrir le dossier du projet  
-4. Lancer le fichier principal du logiciel  
+## ⚙️ Technologies
+
+- HTML / CSS / JavaScript (Frontend)
+- Python Flask API (Backend)
+- JSON (échange de données)
 
 ---
 
-## 🎯 Public cible
-- Commerçants  
-- PME  
-- Entrepreneurs  
-- Comptables débutants et professionnels  
+## 🔗 Backend API
+
+Le projet utilise une API backend :
+
+- Stock : `/stock`
+- Ventes : `/sales`
+- Dashboard : `/dashboard`
+
+👉 URL backend :
+https://cm-compta-backend.onrender.com
 
 ---
 
-## 📍 Développé par
-**CM Finance & Digital Consulting**  
-📧 financeetdigitalconsulting666@gmail.com  
+## 📁 Structure
+
+- index.html → interface principale
+- backend → cm-compta-backend (API Python)
 
 ---
 
-## ⚠️ Note
-Ce logiciel est en évolution continue. Des mises à jour seront ajoutées régulièrement.
+## 👨‍💻 Auteur
+
+Finance et Digital Consulting
+📧 financeetdigitalconsulting666@gmail.com
+
+---
+
+## 📌 Objectif
+
+Simplifier la comptabilité OHADA pour les PME africaines grâce au digital.
