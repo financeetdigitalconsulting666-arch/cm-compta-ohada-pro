@@ -1,17 +1,33 @@
 <script>
 const API = "https://cm-compta-backend.onrender.com";
 
-async function loadSales(){
-let r = await fetch(API + "/sales");
-let d = await r.json();
-document.getElementById("out").innerText =
-JSON.stringify(d, null, 2);
+async function loadStock() {
+  try {
+    let res = await fetch(API + "/stock");
+    let data = await res.json();
+    document.getElementById("stock").innerText =
+      JSON.stringify(data, null, 2);
+  } catch (err) {
+    document.getElementById("stock").innerText = "Erreur stock";
+  }
 }
 
-async function loadStock(){
-let r = await fetch(API + "/stock");
-let d = await r.json();
-document.getElementById("out").innerText =
-JSON.stringify(d, null, 2);
+async function loadSales() {
+  try {
+    let res = await fetch(API + "/sales");
+    let data = await res.json();
+    document.getElementById("sales").innerText =
+      JSON.stringify(data, null, 2);
+  } catch (err) {
+    document.getElementById("sales").innerText = "Erreur ventes";
+  }
 }
+
+function loadData() {
+  loadStock();
+  loadSales();
+}
+
+// Charger automatiquement au démarrage
+window.onload = loadData;
 </script>
