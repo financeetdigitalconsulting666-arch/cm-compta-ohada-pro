@@ -14,6 +14,9 @@
 <h2>💰 VENTES</h2>
 <div id="sales">Chargement...</div>
 
+<h2>📊 RÉSUMÉ</h2>
+<div id="dashboard">Chargement...</div>
+
 <button onclick="loadData()">🔄 Actualiser</button>
 
 <script>
@@ -23,29 +26,56 @@ async function loadStock() {
   let res = await fetch(API + "/stock");
   let data = await res.json();
 
+  let totalStock = 0;
   let html = "";
+
   data.forEach(item => {
     html += item.produit + " : " + item.quantite + "<br>";
+    totalStock += item.quantite;
   });
 
   document.getElementById("stock").innerHTML = html;
+  return totalStock;
 }
 
 async function loadSales() {
   let res = await fetch(API + "/sales");
   let data = await res.json();
 
+  let totalSales = 0;
   let html = "";
+
   data.forEach(item => {
     html += item.produit + " : " + item.montant + " FCFA<br>";
+    totalSales += item.montant;
   });
 
   document.getElementById("sales").innerHTML = html;
+  return totalSales;
+}
+
+async function loadDashboard() {
+  let stock = await loadStock();
+  let sales = await loadSales();
+
+  let alert = "";
+
+  // 🔔 alerte simple
+  if (stock < 20) {
+    alert = "⚠️ Stock faible !";
+  } else {
+    alert = "✔ Stock normal";
+  }
+
+  document.getElementById("dashboard").innerHTML = `
+    💰 Total ventes : ${sales} FCFA <br>
+    📦 Total stock : ${stock} <br>
+    🔔 ${alert}
+  `;
 }
 
 function loadData() {
-  loadStock();
-  loadSales();
+  loadDashboard();
 }
 
 window.onload = loadData;
