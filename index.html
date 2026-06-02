@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CM COMPTA OHADA</title>
+  <title>CM COMPTA OHADA PRO</title>
 </head>
 
 <body>
 
-<h1>📊 CM COMPTA OHADA</h1>
+<h1>📊 CM COMPTA OHADA PRO</h1>
 
 <h2>📦 STOCK</h2>
-<div id="stock">Chargement...</div>
+<div id="stock"></div>
 
 <h2>💰 VENTES</h2>
-<div id="sales">Chargement...</div>
+<div id="sales"></div>
 
-<h2>📊 RÉSUMÉ</h2>
-<div id="dashboard">Chargement...</div>
+<h2>👥 CLIENTS</h2>
+<div id="clients"></div>
 
-<button onclick="loadData()">🔄 Actualiser</button>
+<h2>📊 DASHBOARD OHADA</h2>
+<div id="dashboard"></div>
+
+<button onclick="loadAll()">🔄 Actualiser</button>
 
 <script>
 const API = "https://cm-compta-backend.onrender.com";
 
+/* ================= STOCK ================= */
 async function loadStock() {
   let res = await fetch(API + "/stock");
   let data = await res.json();
 
-  let totalStock = 0;
   let html = "";
+  let totalStock = 0;
 
   data.forEach(item => {
-    html += item.produit + " : " + item.quantite + "<br>";
+    html += `${item.produit} : ${item.quantite}<br>`;
     totalStock += item.quantite;
   });
 
@@ -38,15 +42,16 @@ async function loadStock() {
   return totalStock;
 }
 
+/* ================= VENTES ================= */
 async function loadSales() {
   let res = await fetch(API + "/sales");
   let data = await res.json();
 
-  let totalSales = 0;
   let html = "";
+  let totalSales = 0;
 
   data.forEach(item => {
-    html += item.produit + " : " + item.montant + " FCFA<br>";
+    html += `${item.produit} : ${item.montant} FCFA<br>`;
     totalSales += item.montant;
   });
 
@@ -54,31 +59,53 @@ async function loadSales() {
   return totalSales;
 }
 
+/* ================= CLIENTS (SIMPLIFIÉ) ================= */
+function loadClients() {
+  let clients = [
+    {nom: "Client A"},
+    {nom: "Client B"},
+    {nom: "Client C"}
+  ];
+
+  let html = "";
+  clients.forEach(c => {
+    html += c.nom + "<br>";
+  });
+
+  document.getElementById("clients").innerHTML = html;
+}
+
+/* ================= DASHBOARD OHADA ================= */
 async function loadDashboard() {
+
   let stock = await loadStock();
   let sales = await loadSales();
 
-  let alert = "";
+  let benefice = sales; // version simple
 
-  // 🔔 alerte simple
+  let statut = "";
+
   if (stock < 20) {
-    alert = "⚠️ Stock faible !";
+    statut = "⚠️ Stock faible";
   } else {
-    alert = "✔ Stock normal";
+    statut = "✔ Stock normal";
   }
 
   document.getElementById("dashboard").innerHTML = `
-    💰 Total ventes : ${sales} FCFA <br>
-    📦 Total stock : ${stock} <br>
-    🔔 ${alert}
+    💰 CA : ${sales} FCFA <br>
+    📦 Stock : ${stock} <br>
+    📈 Bénéfice estimé : ${benefice} FCFA <br>
+    🔔 Statut : ${statut}
   `;
 }
 
-function loadData() {
+/* ================= LOAD ALL ================= */
+function loadAll() {
   loadDashboard();
+  loadClients();
 }
 
-window.onload = loadData;
+window.onload = loadAll;
 </script>
 
 </body>
