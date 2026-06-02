@@ -1,26 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CM COMPTA OHADA</title>
+</head>
+
+<body>
+
+<h1>📊 CM COMPTA OHADA</h1>
+
+<h2>📦 STOCK</h2>
+<div id="stock">Chargement...</div>
+
+<h2>💰 VENTES</h2>
+<div id="sales">Chargement...</div>
+
+<button onclick="loadData()">🔄 Actualiser</button>
+
 <script>
 const API = "https://cm-compta-backend.onrender.com";
 
 async function loadStock() {
-  try {
-    let res = await fetch(API + "/stock");
-    let data = await res.json();
-    document.getElementById("stock").innerText =
-      JSON.stringify(data, null, 2);
-  } catch (err) {
-    document.getElementById("stock").innerText = "Erreur stock";
-  }
+  let res = await fetch(API + "/stock");
+  let data = await res.json();
+
+  let html = "";
+  data.forEach(item => {
+    html += item.produit + " : " + item.quantite + "<br>";
+  });
+
+  document.getElementById("stock").innerHTML = html;
 }
 
 async function loadSales() {
-  try {
-    let res = await fetch(API + "/sales");
-    let data = await res.json();
-    document.getElementById("sales").innerText =
-      JSON.stringify(data, null, 2);
-  } catch (err) {
-    document.getElementById("sales").innerText = "Erreur ventes";
-  }
+  let res = await fetch(API + "/sales");
+  let data = await res.json();
+
+  let html = "";
+  data.forEach(item => {
+    html += item.produit + " : " + item.montant + " FCFA<br>";
+  });
+
+  document.getElementById("sales").innerHTML = html;
 }
 
 function loadData() {
@@ -28,6 +48,8 @@ function loadData() {
   loadSales();
 }
 
-// Charger automatiquement au démarrage
 window.onload = loadData;
 </script>
+
+</body>
+</html>
